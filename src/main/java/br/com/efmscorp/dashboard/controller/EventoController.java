@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.efmscorp.dashboard.dao.EventoDAO;
 import br.com.efmscorp.dashboard.dto.IntervaloDatas;
+import br.com.efmscorp.dashboard.dto.VolumeAlarmes;
 import br.com.efmscorp.dashboard.model.Evento;
 import br.com.efmscorp.dashboard.model.Usuario;
 
@@ -43,5 +44,15 @@ public class EventoController {
 		return lista;
 	}
 	
-		
+	@GetMapping("/eventos/consolidado/todos")
+	public ArrayList<VolumeAlarmes> recuperarConsolidado(){
+		return dao.gettAllVolumes();
+	}
+	
+	@PostMapping("/eventos/consolidado/intervalo")
+	public ArrayList<VolumeAlarmes> recuperarConsolidadoPeloIntervalo(@RequestBody IntervaloDatas intervalo){
+		return dao.getAllByDatas(intervalo.getDataInicio(), intervalo.getDataFim());
+	}	
+	
+	
 }
